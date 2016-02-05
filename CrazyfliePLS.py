@@ -78,18 +78,18 @@ class QuadcopterAltHold:
                                     self._altitude)
 
     def setRoll (self, roll):
-        if (roll < -20):
-            self._roll = -20
-        elif (roll > 20):
-            self._roll = 20
+        if (roll < -45):
+            self._roll = -45
+        elif (roll > 45):
+            self._roll = 45
         else:
             self._roll = roll
 
     def setPitch (self, pitch):
-        if (pitch < -20):
-            self._pitch = -20
-        elif (pitch > 20):
-            self._pitch = 20
+        if (pitch < -45):
+            self._pitch = -45
+        elif (pitch > 45):
+            self._pitch = 45
         else:
             self._pitch = pitch
 
@@ -167,6 +167,7 @@ class QuadcopterAltHold:
         # Other functions you can use:
         # self.setPitch ( X ) where X is in degrees
         # self.setRoll ( X )
+        # self.setYawRate ( X )
 
         if self._time < 1.0:
             self.increaseAltitude(1) # Go up at 1 meter per second
