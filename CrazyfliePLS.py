@@ -1,18 +1,20 @@
 """
 HOW TO USE THIS FILE:
 
-This text should be green, if you are reading it using IDLE, the Python IDE. It's green
-because it's a "comment" added to the program. The computer totally ignores it. Most of
-the green text in this file is a note left to help you understand what's going on.
+This text should be green if you are reading it using IDLE, the Python IDE.
+It's green because it's a "comment" added to the program. The computer totally
+ignores it. Most of the green text in this file is a note left to help you
+understand what's going on.
 
-Look below for the line that says "class Quadcopter": in it you will find two functions
-definitions starting with the word "def". Those two functions are __init__ and _update.
-The __init__ function is run one time at the beginning of the program. The _update function
-is run 10 times per second to set the current state of the quadcopter.
+Look below for the line that says "class QuadcopterAltHold": in it you will
+find two functions definitions starting with the word "def". Those two
+functions are __init__ and _update. The __init__ function is run one time at
+the beginning of the program. The _update function is run 10 times per second
+to set the current state of the quadcopter.
 
-Your mission, should you choose to accept it, is to add code to the _update function to set
-up a flight path for the quadcopter. Your copter will fly for 10 seconds each time this
-program is run.
+Your mission, should you choose to accept it, is to add code to the _update
+function to set up a flight path for the quadcopter. Your copter will fly for
+10 seconds each time this program is run.
 
 """
 
@@ -197,7 +199,8 @@ class QuadcopterAltHold:
 
         
             
-
+""" This is the older version of the code: it allows direct control of the
+quadcopter, with no altitude hold. """
 class Quadcopter:
 
     """ A function that is run once at the beginning """
@@ -206,20 +209,6 @@ class Quadcopter:
         cf.commander.send_setpoint(0, 0, 0, 0)
         self._updateCallCounter = 0
 
-
-    """
-    EDIT THIS FUNCTION
-
-          |
-          |
-          |
-          |
-       \  |  /
-        \ | /
-         \|/
-          V
-
-    A function that is called 10 times per second """
     def _update (self, cf):
         self._updateCallCounter += 1
 
@@ -273,11 +262,10 @@ class Controller:
         """ This callback is called form the Crazyflie API when a Crazyflie
         has been connected and the TOCs have been downloaded."""
 
-        # Do not hijack the calling thread!
-        #self._quadcopter = Quadcopter (self._cf)
         
         print "Connected."
-        self._quadcopter = QuadcopterAltHold (self._cf)
+        #self._quadcopter = Quadcopter (self._cf) # The older, harder-to-use code
+        self._quadcopter = QuadcopterAltHold (self._cf) # Altitude hold mode!
         Thread(target=self._run).start()
 
     def _connection_failed(self, link_uri, msg):
