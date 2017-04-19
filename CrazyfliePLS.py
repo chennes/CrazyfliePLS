@@ -24,7 +24,7 @@ function to set up a flight path for the quadcopter. Your copter will fly for
 
 ###################################################
 # CRITICAL STEP!! SET YOUR QUADCOPTER NUMBER HERE #
-QUADCOPTER_NUMBER = 5
+QUADCOPTER_NUMBER = 4
 #                                                 # 
 # The quadcopter number is printed on the bottom  #
 # of each quadcopter, and is a number between 1   #
@@ -94,7 +94,7 @@ class Quadcopter:
         elif (self._time < 1.5):
             # Spin in place (yaw rate = 200) 
             cf.commander.send_setpoint (0,0,200,30000)
-        elif (self._updateCallCounter < 2.0):
+        elif (self._time < 2.0):
 	    # Land (sort of)
             cf.commander.send_setpoint (0,0,0,25000)
         else:
