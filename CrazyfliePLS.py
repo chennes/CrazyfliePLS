@@ -7,7 +7,8 @@ ignores it. Most of the green text in this file is a note left to help you
 understand what's going on.
 
 Look below for the line that says "class Quadcopter": in it you will
-find two functions definitions starting with the word "def". Those two
+fin
+d two functions definitions starting with the word "def". Those two
 functions are __init__ and _update. The __init__ function is run one time at
 the beginning of the program. The _update function is run 10 times per second
 to set the current state of the quadcopter.
@@ -24,7 +25,8 @@ function to set up a flight path for the quadcopter. Your copter will fly for
 
 ###################################################
 # CRITICAL STEP!! SET YOUR QUADCOPTER NUMBER HERE #
-QUADCOPTER_NUMBER = 4
+QUADCOPTER_NUMBER = 8
+
 #                                                 # 
 # The quadcopter number is printed on the bottom  #
 # of each quadcopter, and is a number between 1   #
@@ -87,21 +89,45 @@ class Quadcopter:
 
     def _update (self, cf):
 
+
+"""
+                      YOUR CHANGES GO HERE
+                                X
+                                X
+                                X
+                                X
+                                X
+                             XXXXXXX
+                              XXXXX
+                               XXX
+                                X
+"""
         # An example program: you can change the numbers, and/or add more "elif" statements
         if (self._time < 0.7):
             # Format is send_setpoint (Roll, Pitch, Yaw rate, Throttle)
-            cf.commander.send_setpoint (0,0,0,30000)
-        elif (self._time < 1.5):
+            cf.commander.send_setpoint (0,0,0,40000)
+        elif (self._time < 2.5):
             # Spin in place (yaw rate = 200) 
-            cf.commander.send_setpoint (0,0,200,30000)
-        elif (self._time < 2.0):
-	    # Land (sort of)
+            cf.commander.send_setpoint (0,0,200,350000)
+        elif (self._time < 3.0):
+	    # Land
             cf.commander.send_setpoint (0,0,0,25000)
+
+        # add more lines like "elif (self._time < SOME TIME):"
+        # to add a more complicated flight profile, with more
+        # steps.
+
+
+
+
+"""
+                   STOP CHANGES HERE
+"""
         else:
 	    # Shut it all down
             cf.commander.send_setpoint(0, 0, 0, 0)
 
-        self._time += 0.1
+        self._time += 1
 
 
 
